@@ -1,0 +1,61 @@
+<html>
+<body>
+ 
+<script>
+  
+  //Market v 1.2
+
+var apel = 10000
+var anggur = 15000
+var jeruk = 20000
+
+alert("Welcome to the Market")
+
+var stockApel = 100
+var stockAnggur = 100
+var stockJeruk = 100
+alert("List of fruits : \nI. Apel \nII. Anggur \nIII. Jeruk")
+
+var qtyApel = prompt(`Please enter the amount of Apel you wish to buy \n Price : Rp. ${apel} \n Stock : ${stockApel}`);
+    
+if (qtyApel > stockApel) {
+        alert(`We're sorry, but we only got ${stockApel} left, so you can only buy ${stockApel} ammount of Apel  `)
+        qtyApel = stockApel
+    }
+var qtyAnggur = prompt(`Please enter the amount of Anggur you wish to buy \n Price : Rp. ${anggur} \n Stock : ${stockAnggur}`);
+    
+if (qtyAnggur > stockAnggur) {
+        alert(`We're sorry, but we only got ${stockAnggur} left, so you can only buy ${stockAnggur} ammount of Apel  `)
+        qtyAnggur = stockAnggur
+    }
+var qtyJeruk = prompt(`Please enter the amount of Jeruk you wish to buy \n Price : Rp. ${jeruk} \n Stock : ${stockJeruk}`);
+    
+if (qtyJeruk > stockJeruk) {
+        alert(`We're sorry, but we only got ${stockJeruk} left, so you can only buy ${stockJeruk} ammount of Apel  `)
+        qtyJeruk = stockJeruk
+    }
+
+var totalApel = qtyApel * apel
+var totalAnggur = qtyAnggur * anggur
+var totalJeruk = qtyJeruk * jeruk
+
+var total = totalApel + totalAnggur + totalJeruk
+
+alert(`Your bill \nI. Apel : Rp. ${totalApel} \nI. Anggur : Rp. ${totalAnggur} \nI. Jeruk : Rp. ${totalJeruk}`)    
+var transaction = prompt(`Please purchase the following ammount = Rp ${total}`)
+var purchase = Number(transaction)
+if ( purchase < total ) {
+    alert("Sorry but your purchase is denied")
+}
+else if ( purchase > total){
+    var change = purchase - total
+    alert(`Congratulations, transaction success, here is your change : Rp ${change}`)
+}
+else {
+    alert("Congratulations, transaction success")
+}
+
+</script>
+</body>
+</html>
+

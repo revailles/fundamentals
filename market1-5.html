@@ -1,0 +1,157 @@
+<html>
+<body>
+ 
+<script>
+  
+  //Market v 1.4
+
+var apel = 10000
+var anggur = 15000
+var jeruk = 20000
+
+alert("Welcome to the Market")
+
+var stockApel = 100
+var stockAnggur = 100
+var stockJeruk = 100
+
+var fruits = [
+    [ "Apel", hargaApel, stockApel ]
+    [ "Anggur", hargaAnggur, stockAnggur]
+    [ "Jeruk", hargaJeruk, stockJeruk]
+]
+
+var cart = [
+
+]
+
+do {
+        var mainMenu = prompt(`Menu Utama :
+    1. List of fruits
+    2. Add fruit
+    3. Remove fruit
+    4. Buy fruit
+    5. Exit`)
+        var konfirmasi
+        if (mainMenu == 1) {
+            var listFruit = 'List of fruits:\n'
+            for (let i = 0; i < fruits.length; i++) {
+                listFruit += `${i + 1}. ${fruits[i][0]} : Rp.${fruits[i][1]},00 , stock = ${fruits[i][2]}\n`
+            }
+            alert(listFruit)
+
+        } else if (mainMenu == 2) {
+            var addFruit = prompt('Name of fruit')
+            var priceNew = parseInt(prompt('Price of fruit'))
+            var stockNew = parseInt(prompt('Number of fruit'))
+            // ?optional 
+            var yakin = confirm(`${addFruit}, harga Rp.${priceNew},00 , stock ${stockNew}\nYakin ?`)
+            if (yakin) {
+                fruits.push([addFruit, priceNew, stockNew])
+                var listFruit = 'List of fruits:\n'
+                for (let i = 0; i < fruits.length; i++) {
+                    listFruit += `${i + 1}. ${fruits[i][0]} : Rp.${fruits[i][1]},00 , stock = ${fruits[i][2]}\n`
+                }
+                alert(listFruit)
+            } else {
+                alert('Return to main menu')
+            }
+        } else if (mainMenu == 3) {
+            var removeFruit = 'Please select the fruit you wish to remove:\n'
+            for (let i = 0; i < fruits.length; i++) {
+                removeFruit += `${i + 1}. ${fruits[i][0]} : Rp.${fruits[i][1]},00 , stock = ${fruits[i][2]}\n`
+            }
+            var nomorDelete = prompt(removeFruit)
+            var conf = confirm(`Are you sure about removing ${fruits[nomorDelete - 1][0]} ?`)
+            if (conf) {
+                fruits.splice(nomorDelete - 1, 1)
+                var listFruit = 'Daftar buah:\n'
+                for (let i = 0; i < fruits.length; i++) {
+                    listFruit += `${i + 1}. ${fruits[i][0]} : Rp.${fruits[i][1]},00 , stock = ${fruits[i][2]}\n`
+                }
+                alert(listFruit)
+            } else { 
+                alert('Return to main menu')
+            }
+        } else if (mainMenu == 4) {
+            while (true) {
+                var buyFruit = 'Select which fruit to buy:\n'
+                for (let i = 0; i < fruits.length; i++) {
+                    buyFruit += `${i + 1}. ${fruits[i][0]} : Rp.${fruits[i][1]},00 , stock = ${fruits[i][2]}\n`
+                }
+                var numBuy = prompt(buyFruit)
+                do {
+                    var qtyBuy = parseInt(prompt(`How many ${fruits[numBuy - 1][0]} you wish to buy ? Stock =  ${fruits[numBuy - 1][2]} `))
+                    if (isNaN(qtyBuy) || qtyBuy > fruits[numBuy - 1][2] || qtyBuy < 0) {
+                        alert('The ammount of fruit you wish to buy is exceeding the number of stock')
+                    }
+                } while (isNaN(qtyBuy) || qtyBuy > fruits[numBuy - 1][2] || qtyBuy < 0);
+
+                fruits[numBuy - 1][2] -= qtyBuy
+                var indexcart = -1
+                for (let i = 0; i < cart.length; i++) {
+                    if (cart[i][0] == fruits[numBuy - 1][0]) {
+                        indexcart = i
+                        break
+                    }
+                }
+                if (indexcart >= 0) {
+                    cart[indexcart][2] += qtyBuy
+                } else {
+                    cart.push([fruits[numBuy - 1][0], fruits[nomorBuy - 1][1], qtyBuy])
+                }
+
+                var listCart = 'Your Cart:\n'
+                for (let i = 0; i < cart.length; i++) {
+                    listCart += `${i + 1}. ${cart[i][0]} : Rp.${cart[i][1]},00 , qty = ${cart[i][2]}\n`
+                }
+                alert(listCart)
+                var butAgain = confirm('Do you wish to buy again?')
+                if (!buyAgain) {
+                    break
+                }
+            }
+
+            var grandTotal = 0
+            for (let i = 0; i < cart.length; i++) {
+                grandTotal += cart[i][1] * cart[i][2]
+            }
+            var promptPay = `Your fruit(s):\n`
+            for (let i = 0; i < cart.length; i++) {
+                promptPay += `${i + 1}. ${cart[i][0]} : Rp.${cart[i][1]},00 X qty = ${cart[i][2]} = ${cart[i][1] * cart[i][2]}\n`
+            }
+            promptPay += `GrandTotal = Rp. ${grandTotal}`
+            do {
+                var inputBayar = prompt(promptPay)
+                if (parseInt(inputBayar) === grandTotal) {
+                    alert('Congratulation, your transaction is success')
+                } else if (inputBayar > grandTotal) {
+                    alert('Your change Rp.' + (inputBayar - grandTotal))
+                } else {
+                    alert('Purchase is denied, please input the correct ammount of payment')
+                }
+            } while (inputBayar < grandTotal || isNaN(inputBayar));
+            alert('Thankyou for purchasing')
+
+        }
+        else if (menuUtama == 5) {
+            konfirmasi = confirm('Are you sure?')
+        } else {
+            alert('Invalid')
+        }
+    } while (!konfirmasi);
+
+</script>
+
+</html>
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
